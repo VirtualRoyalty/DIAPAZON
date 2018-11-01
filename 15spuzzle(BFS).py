@@ -1,9 +1,3 @@
-
-# coding: utf-8
-
-# In[120]:
-
-
 import numpy as np
 import sys
 
@@ -31,15 +25,15 @@ for x in range(100):
         board=move_to(board,mov[i])
     else:
         continue
-#board[0][0]=1 #д
-#board[0][1]=2 #и
-#board[0][2]=3 #а
-#board[1][0]=4 #п
+#board[0][0]=0 #д
+#board[0][1]=7 #и
+#board[0][2]=6 #а
+#board[1][0]=5 #п
 #board[1][1]=3 #а
-#board[1][2]=5 #з
-#board[2][0]=6 #о
-#board[2][1]=0 #н
-#board[2][2]=7 #_
+#board[1][2]=4 #з
+#board[2][0]=3 #о
+#board[2][1]=2 #н
+#board[2][2]=1 #_
 
 print(board)
 print("start___________")
@@ -52,7 +46,7 @@ def BFS(sample_board_,board_):#поиск в ширину
         print("WE DID IT!in just",len(close_),"moves")
         return
     while (len(open_)>0): 
-        #print(len(open_))
+        print(len(close_))
         V=open_.pop(0)
         listofmovs=movsOF(V,inversmov(V[0]))
         close_.append(V[-1])
@@ -63,9 +57,8 @@ def BFS(sample_board_,board_):#поиск в ширину
                     print(v[-1])
                     count=0
                     while(v[0]!='NULL'):
-                        print(v[1][-1])
+                        print(v[1][-1], "______")
                         v=v[1]
-                        moves.append(v[0])
                         count+=1
                     print("in just",count,"moves")
                     return
@@ -73,20 +66,9 @@ def BFS(sample_board_,board_):#поиск в ширину
     print('There is no solution :(')
     return False
 
-        
-        
-   
-                        
-       
-
-     
-    
-    
+            
 EQUEL(sample_board,board)   
 BFS(sample_board,board)
-
-
-# In[77]:
 
 
 import collections
@@ -111,16 +93,9 @@ def distance(sample_board_,board_): #расстояние от текущей с
                     diff=diff+1
     return diff
 
-def manhet_dist(sample_board_,board_): #манхетоновское расстояние
-    diff_=0
-    for i in range(len(board_)):
-         for j in range(len(board_)):
-                x0,y0=find_elem(sample_board_,board_[i][j])
-                diff_=diff_+(abs(i-x0)+abs(j-y0))
-    
-    return diff_
 
-def EQUEL(sample_board_,board_): #манхетоновское расстояние
+
+def EQUEL(sample_board_,board_): 
     for i in range(len(board_)):
          for j in range(len(board_)):
             if(sample_board_[i][j]!=board_[i][j]):
@@ -178,12 +153,11 @@ def movepossbl(board_,where): #проверяет возможен ли данн
     return True
 
 
-def isthere(lst,crumb):#проверяет принадлежность вершины(данной доски) к списку
+def isthere(lst,elem):#проверяет принадлежность вершины(данной доски) к списку
     for x in lst:
-        if(manhet_dist(crumb,x)==0):
+        if(EQUEL(x,elem)):
             return True
-        else:
-            return False
+    return False
     
 def movsOF(board_,last_mov):#создает массив возвожных ходов
     mov=['d','u','r','l']
@@ -233,4 +207,3 @@ def inversmov(mov_): #"переворачивает" ход
     if(mov_=='r'):
         return 'l'
     return mov_
-
