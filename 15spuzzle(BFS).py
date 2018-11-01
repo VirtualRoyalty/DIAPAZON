@@ -82,17 +82,7 @@ def swap(board_,i,j): #меняет два элемента местами
     board_[jx][jy]=i
     return
     
-    
-    
-def distance(sample_board_,board_): #расстояние от текущей состояния доски до терминальной(число элементов не на своих местах)
-    diff=0
-    for i in range(len(board_)):
-         for j in range(len(board_)):
-            if(board_[i][j]!=0):
-                if (sample_board_[i][j]!=board_[i][j]):
-                    diff=diff+1
-    return diff
-
+ 
 
 
 def EQUEL(sample_board_,board_): 
@@ -112,33 +102,7 @@ def find_elem(board_,elem_):  #ищет данный элемент и возв�
     return elem_x,elem_y
 
 
-    
-def solutionPosible_notzero(board_):#проверка по критерию собираемости
-    zerx,zery=find_elem(board_,0)
-    zerx=zerx+1
-    sum=0
-    line=board_list(board_)
-    for x in range(len(line)):
-        if(line[x]!=0):
-            for y in range(x+1,len(line)):
-                if(line[y]!=0):
-                    if line[x]>line[y]:
-                        sum=sum+1
-            sum=sum+zerx
-    
-            
-    #print(sum)
-    if((sum) % 2==0):
-        return True
-    else:
-        return False
-
-def board_list(board_): #интерпретирует доску как список
-    string=[]
-    for i in range(len(board_)):
-        for j in  range(len(board_)):
-            string.append(board_[i][j])
-    return string
+   
 
 def movepossbl(board_,where): #проверяет возможен ли данный ход
     zery,zerx=find_elem(board_,0)
